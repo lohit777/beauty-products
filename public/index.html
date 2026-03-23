@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Beauty Store</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+  <header>
+    <h1>✨ Beauty Store ✨</h1>
+    <p>Buy your favorite beauty products online!</p>
+  </header>
+
+  <main class="product-grid">
+
+    <!-- Product Cards -->
+    <div class="product-card">
+      <h3>Face Cream</h3>
+      <p>₹499</p>
+      <button onclick="buy(499)">Buy Now</button>
+    </div>
+
+    <div class="product-card">
+      <h3>Lipstick</h3>
+      <p>₹299</p>
+      <button onclick="buy(299)">Buy Now</button>
+    </div>
+
+    <div class="product-card">
+      <h3>Shampoo</h3>
+      <p>₹399</p>
+      <button onclick="buy(399)">Buy Now</button>
+    </div>
+
+    <div class="product-card">
+      <h3>Conditioner</h3>
+      <p>₹350</p>
+      <button onclick="buy(350)">Buy Now</button>
+    </div>
+
+    <div class="product-card">
+      <h3>Foundation</h3>
+      <p>₹599</p>
+      <button onclick="buy(599)">Buy Now</button>
+    </div>
+
+    <div class="product-card">
+      <h3>Blush</h3>
+      <p>₹250</p>
+      <button onclick="buy(250)">Buy Now</button>
+    </div>
+
+    <div class="product-card">
+      <h3>Body Lotion</h3>
+      <p>₹399</p>
+      <button onclick="buy(399)">Buy Now</button>
+    </div>
+
+    <div class="product-card">
+      <h3>Perfume</h3>
+      <p>₹799</p>
+      <button onclick="buy(799)">Buy Now</button>
+    </div>
+
+    <div class="product-card">
+      <h3>Hand Cream</h3>
+      <p>₹299</p>
+      <button onclick="buy(299)">Buy Now</button>
+    </div>
+
+    <div class="product-card">
+      <h3>Face Wash</h3>
+      <p>₹199</p>
+      <button onclick="buy(199)">Buy Now</button>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>© 2026 Beauty Store | All rights reserved</p>
+  </footer>
+
+  <script>
+    async function buy(price) {
+      console.log("Buy button clicked, price:", price);
+      const res = await fetch("/create-order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ amount: price })
+      });
+      const order = await res.json();
+      console.log(order);
+
+      const options = {
+        key: "rzp_test_SUjeFrZaRP0g8W", // Replace with your Razorpay test/live key_id
+        amount: order.amount,
+        currency: "INR",
+        order_id: order.id,
+        name: "Beauty Store",
+        handler: function () {
+          alert("Payment successful!");
+          window.location.href = "/success.html";
+        }
+      };
+
+      const rzp = new Razorpay(options);
+      rzp.open();
+    }
+  </script>
+
+</body>
+</html>
