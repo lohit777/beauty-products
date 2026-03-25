@@ -142,3 +142,158 @@ body {
   .checkout-btn:hover {
     transform: scale(1.05);
   }
+
+  /* CART PAGE */
+.cart-page {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  .cart-title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* CART ITEMS */
+  .cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  /* ITEM INFO */
+  .cart-item h4 {
+    margin: 0;
+  }
+  
+  .cart-item p {
+    margin: 5px 0;
+    color: gray;
+  }
+  
+  /* QTY CONTROLS */
+  .qty {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .qty button {
+    padding: 5px 10px;
+    border: none;
+    background: #ff69b4;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .qty span {
+    font-weight: bold;
+  }
+  
+  /* REMOVE BUTTON */
+  .cart-item button {
+    background: #ff4d4d;
+    border: none;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* TOTAL */
+  .cart-total {
+    text-align: right;
+    margin-top: 20px;
+  }
+  
+  /* ACTION BUTTONS */
+  .cart-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  /* BUY BUTTON */
+  .buy-btn {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  /* CONTINUE SHOPPING */
+  .continue-btn {
+    background: #f1f1f1;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  /* HOVER EFFECTS */
+  .buy-btn:hover {
+    background: #218838;
+  }
+  
+  .continue-btn:hover {
+    background: #ddd;
+  }
+  
+  .cart-item button:hover {
+    opacity: 0.9;
+  }
+
+  .checkout-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: white;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 20px;
+    align-items: center;
+  }
+  
+  .checkout-bar button {
+    background: #ff4d94;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+
+  .product-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 15px;
+  }
+  
+  .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  }
+  .cart-icon {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 18px;
+    cursor: pointer;
+  }

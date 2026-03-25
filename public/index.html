@@ -10,9 +10,9 @@
   <header>
     <h1>✨ Beauty Store ✨</h1>
     <p>Buy your favorite beauty products online!</p>
-    <div id="cart-message" class="cart-message">
-        🛒 Cart is empty
-    </div>
+    <div class="cart-icon">
+        🛒 <span id="cart-count">0</span>
+      </div>
   </header>
 
   <main class="product-grid">
@@ -22,135 +22,83 @@
         <h3>Face Cream</h3>
         <p>₹10</p>
       
-        <div class="qty">
-          <button onclick="changeQty('face', -1)">-</button>
-          <span id="qty-face">0</span>
-          <button onclick="changeQty('face', 1)">+</button>
-        </div>
-      
-        <button onclick="addToCart('Face Cream', 10, 'face')">Add to Cart</button>
+        <button onclick="addToCart('Face Cream', 10)">Add to Cart</button>
       </div>
    
     <div class="product-card">
         <h3>Lipstick</h3>
         <p>₹299</p>
-      
-        <div class="qty">
-          <button onclick="changeQty('lipstick', -1)">-</button>
-          <span id="qty-lipstick">0</span>
-          <button onclick="changeQty('lipstick', 1)">+</button>
-        </div>
-      
-        <button onclick="addToCart('Lipstick', 299, 'lipstick')">Add to Cart</button>
+        <button onclick="addToCart('Lipstick', 299)">Add to Cart</button>
       </div>
       <div class="product-card">
         <h3>Shampoo</h3>
         <p>399</p>
       
-        <div class="qty">
-          <button onclick="changeQty('shampoo', -1)">-</button>
-          <span id="qty-shampoo">0</span>
-          <button onclick="changeQty('shampoo', 1)">+</button>
-        </div>
-      
-        <button onclick="addToCart('Shampoo', 399, 'shampoo')">Add to Cart</button>
+        <button onclick="addToCart('Shampoo', 399)">Add to Cart</button>
       </div>
 
       <div class="product-card">
         <h3>Conditioner</h3>
         <p>350</p>
       
-        <div class="qty">
-          <button onclick="changeQty('conditioner', -1)">-</button>
-          <span id="qty-conditioner">0</span>
-          <button onclick="changeQty('conditioner', 1)">+</button>
-        </div>
-      
-        <button onclick="addToCart('Conditioner', 350, 'conditioner')">Add to Cart</button>
+        <button onclick="addToCart('Conditioner', 350)">Add to Cart</button>
       </div>
       <div class="product-card">
         <h3>Foundation</h3>
         <p>599</p>
-      
-        <div class="qty">
-          <button onclick="changeQty('foundation', -1)">-</button>
-          <span id="qty-foundation">0</span>
-          <button onclick="changeQty('foundation', 1)">+</button>
-        </div>
-      
-        <button onclick="addToCart('Foundation', 599, 'foundation')">Add to Cart</button>
+        <button onclick="addToCart('Foundation', 599)">Add to Cart</button>
       </div>
 
       <div class="product-card">
         <h3>Blush</h3>
         <p>250</p>
-      
-        <div class="qty">
-          <button onclick="changeQty('blush', -1)">-</button>
-          <span id="qty-blush">0</span>
-          <button onclick="changeQty('blush', 1)">+</button>
-        </div>
-      
-        <button onclick="addToCart('Blush', 250, 'blush')">Add to Cart</button>
+        <button onclick="addToCart('Blush', 250)">Add to Cart</button>
       </div>
 
       <div class="product-card">
         <h3>Body Lotion</h3>
         <p>399</p>
       
-        <div class="qty">
-          <button onclick="changeQty('bodylotion', -1)">-</button>
-          <span id="qty-bodylotion">0</span>
-          <button onclick="changeQty('bodylotion', 1)">+</button>
-        </div>
-      
-        <button onclick="addToCart('Body Lotion', 399, 'bodylotion')">Add to Cart</button>
+        <button onclick="addToCart('Body Lotion', 399)">Add to Cart</button>
       </div>
 
       <div class="product-card">
         <h3>Perfume</h3>
         <p>₹799</p>
       
-        <div class="qty">
-          <button onclick="changeQty('perfume', -1)">-</button>
-          <span id="qty-perfume">0</span>
-          <button onclick="changeQty('perfume', 1)">+</button>
-        </div>
-      
-        <button onclick="addToCart('Perfume', 799, 'perfume')">Add to Cart</button>
+        <button onclick="addToCart('Perfume', 799)">Add to Cart</button>
       </div>
 
       <div class="product-card">
         <h3>Hand Cream</h3>
         <p>₹299</p>
       
-        <div class="qty">
-          <button onclick="changeQty('handcream', -1)">-</button>
-          <span id="qty-handcream">0</span>
-          <button onclick="changeQty('handcream', 1)">+</button>
-        </div>
-      
-        <button onclick="addToCart('Hand Cream', 299, 'handcream')">Add to Cart</button>
+        <button onclick="addToCart('Hand Cream', 299)">Add to Cart</button>
       </div>
       <div class="product-card">
         <h3>Face Wash</h3>
         <p>₹199</p>
       
-        <div class="qty">
-          <button onclick="changeQty('facewash', -1)">-</button>
-          <span id="qty-facewash">0</span>
-          <button onclick="changeQty('facewash', 1)">+</button>
-        </div>
-      
-        <button onclick="addToCart('Face Wash', 199, 'facewash')">Add to Cart</button>
+        <button onclick="addToCart('Face Wash', 199)">Add to Cart</button>
       </div>
 
-      <div style="text-align:center; margin:30px;">
-        <button class="checkout-btn" onclick="checkout()">
-          Proceed to Checkout 💳
-        </button>
+      <div id="checkout-bar" class="checkout-bar">
+        <span id="checkout-summary">🛒 0 items | ₹0</span>
+        <button onclick="checkout()">Checkout 💳</button>
       </div>
   </main>
+  <div id="cart-page" class="cart-page" style="display:none;">
+    <h2 class="cart-title">🛒 Your Cart</h2>
+  
+    <div id="cart-items" class="cart-items"></div>
+  
+    <h3 id="cart-total" class="cart-total"></h3>
+  
+    <div class="cart-actions">
+      <button class="buy-btn" onclick="buyNow()">Buy Now 💳</button>
+      <button class="continue-btn" onclick="goHome()">← Continue Shopping</button>
+    </div>
+  </div>
   <div id="success-box" class="success-box" style="display:none;">
     <h2>✅ Payment Successful!</h2>
     <p id="payment-details"></p>
@@ -161,100 +109,166 @@
   </footer>
 
   <script>
-    let cart = [];
-  
-    function changeQty(id, change) {
-  const qtyElement = document.getElementById("qty-" + id);
-  let qty = parseInt(qtyElement.innerText);
+   let cart = [];
 
-  qty += change;
+/* =========================
+   PRODUCT PAGE
+========================= */
 
-  // prevent negative
-  if (qty < 0) qty = 0;
 
-  qtyElement.innerText = qty;
-}
-  
-function addToCart(name, price, id) {
-  const qty = parseInt(document.getElementById("qty-" + id).innerText);
-
-  if (qty === 0) {
-    showMessage("⚠️ Please select quantity first");
-    return;
-  }
-
+function addToCart(name, price) {
   const existing = cart.find(item => item.name === name);
 
   if (existing) {
-    existing.qty += qty;
+    existing.qty += 1;
   } else {
-    cart.push({ name, price, qty });
+    cart.push({ name, price, qty: 1 });
   }
 
-  // update message
-  updateCartMessage();
-
-  // reset qty
-  document.getElementById("qty-" + id).innerText = 0;
+  updateCartMessage(name); // 👈 pass product name
 }
-function updateCartMessage() {
-  let totalItems = 0;
 
-  cart.forEach(item => {
-    totalItems += item.qty;
+/* =========================
+   CART LOGIC
+========================= */
+
+function checkout() {
+  if (cart.length === 0) {
+    alert("Cart is empty!");
+    return;
+  }
+
+  document.querySelector(".product-grid").style.display = "none";
+  document.getElementById("cart-page").style.display = "block";
+
+  renderCart();
+}
+
+function renderCart() {
+  const container = document.getElementById("cart-items");
+  container.innerHTML = "";
+
+  let total = 0;
+
+  cart.forEach((item, index) => {
+    total += item.price * item.qty;
+
+    const div = document.createElement("div");
+    div.className = "cart-item";
+
+    div.innerHTML = `
+      <div>
+        <h4>${item.name}</h4>
+        <p>₹${item.price}</p>
+      </div>
+
+      <div class="qty">
+        <button onclick="updateCartQty(${index}, -1)">-</button>
+        <span>${item.qty}</span>
+        <button onclick="updateCartQty(${index}, 1)">+</button>
+      </div>
+
+      <button onclick="removeItem(${index})">Remove</button>
+    `;
+
+    container.appendChild(div);
   });
 
-  document.getElementById("cart-message").innerText =
-    `🛒 ${totalItems} item(s) added to cart`;
+  document.getElementById("cart-total").innerText = "Total: ₹" + total;
 }
 
-function showMessage(msg) {
-  document.getElementById("cart-message").innerText = msg;
+function updateCartQty(index, change) {
+  cart[index].qty += change;
+
+  if (cart[index].qty <= 0) {
+    cart.splice(index, 1);
+  }
+
+  renderCart();
+  updateCartMessage();
 }
-  
-    async function checkout() {
-      if (cart.length === 0) {
-        alert("Cart is empty!");
-        return;
-      }
-  
-      let total = 0;
-      cart.forEach(item => {
-        total += item.price * item.qty;
-      });
-  
-      const res = await fetch("/create-order", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ amount: total })
-      });
-  
-      const order = await res.json();
-  
-      const options = {
-        key: "rzp_live_SVJmHc21qZLR1y",
-        amount: order.amount,
-        currency: "INR",
-        order_id: order.id,
-        name: "Beauty Store",
-  
-        handler: function (response) {
-          document.getElementById("success-box").style.display = "block";
-  
-          document.getElementById("payment-details").innerText =
-            "Payment ID: " + response.razorpay_payment_id +
-            "\nTotal Paid: ₹" + total;
-  
-          cart = []; // clear cart
-        }
-      };
-  
-      const rzp = new Razorpay(options);
-      rzp.open();
+
+function removeItem(index) {
+  cart.splice(index, 1);
+  renderCart();
+  updateCartMessage();
+}
+
+/* =========================
+   PAYMENT
+========================= */
+
+async function buyNow() {
+  if (cart.length === 0) {
+    alert("Cart is empty!");
+    return;
+  }
+
+  const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+
+  const res = await fetch("/create-order", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ amount: total })
+  });
+
+  const order = await res.json();
+
+  const options = {
+    key: "rzp_live_SVJmHc21qZLR1y",
+    amount: order.amount,
+    currency: "INR",
+    order_id: order.id,
+    name: "Beauty Store",
+
+    handler: function (response) {
+      showSuccess(response.razorpay_payment_id, total);
+      cart = [];
+      updateCartMessage();
     }
-    function goHome() {
+  };
+
+  new Razorpay(options).open();
+}
+
+/* =========================
+   UI HELPERS
+========================= */
+
+function updateCartMessage(lastAdded = "") {
+  const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+  const totalAmount = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+
+  // ✅ Safe update (no crash)
+  const msg = document.getElementById("cart-message");
+  if (msg) {
+    msg.innerText =
+      totalItems === 0
+        ? "🛒 Cart is empty"
+        : `🛒 ${totalItems} item(s) in cart | Added: ${lastAdded} ✅`;
+  }
+
+  // ✅ Bottom bar update
+  document.getElementById("checkout-summary").innerText =
+    `🛒 ${totalItems} items | ₹${totalAmount}`;
+
+  // ✅ Top icon update
+  document.getElementById("cart-count").innerText = totalItems;
+}
+
+function showSuccess(paymentId, total) {
+  document.getElementById("cart-page").style.display = "none";
+  document.getElementById("success-box").style.display = "block";
+
+  document.getElementById("payment-details").innerText =
+    `Payment ID: ${paymentId}\nTotal Paid: ₹${total}`;
+}
+
+function goHome() {
+  document.getElementById("cart-page").style.display = "none";
+  document.querySelector(".product-grid").style.display = "grid";
   document.getElementById("success-box").style.display = "none";
 }
   </script>
