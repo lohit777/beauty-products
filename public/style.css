@@ -79,3 +79,66 @@ body {
     color: #b30059;
     margin-top: 30px;
   }
+
+  .success-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    z-index: 1000;
+  }
+  
+  .success-box h2 {
+    color: green;
+  }
+  
+  .success-box button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: #ff4081;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .qty {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 10px 0;
+  }
+  
+  .qty button {
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+
+  .cart-message {
+    text-align: center;
+    background: #f8f8f8;
+    padding: 10px;
+    font-weight: 500;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .checkout-btn {
+    background: linear-gradient(135deg, #ff4081, #ff80ab);
+    color: white;
+    padding: 12px 30px;
+    font-size: 16px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: 0.3s;
+  }
+  
+  .checkout-btn:hover {
+    transform: scale(1.05);
+  }
