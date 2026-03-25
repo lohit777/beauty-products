@@ -7,13 +7,18 @@
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <body>
-  <header>
-    <h1>✨ Beauty Store ✨</h1>
-    <p>Buy your favorite beauty products online!</p>
-    <div class="cart-icon">
-        🛒 <span id="cart-count">0</span>
-      </div>
-  </header>
+    <header class="header">
+        <h1 class="title">✨ Beauty Store ✨</h1>
+        <p class="subtitle">Buy your favorite beauty products online!</p>
+      
+        <div class="cart-icon" onclick="checkout()">
+          🛒
+          <span id="cart-count" class="cart-count">0</span>
+          <span id="cart-total-top" class="cart-total-top">₹0</span>
+          <span id="cart-checkout" class="cart-checkout">Checkout →</span>
+
+        </div>
+      </header>
 
   <main class="product-grid">
 
@@ -82,10 +87,6 @@
         <button onclick="addToCart('Face Wash', 199)">Add to Cart</button>
       </div>
 
-      <div id="checkout-bar" class="checkout-bar">
-        <span id="checkout-summary"></span>
-                <button onclick="checkout()">Checkout 💳</button>
-      </div>
   </main>
   <div id="cart-page" class="cart-page" style="display:none;">
     <h2 class="cart-title">🛒 Your Cart</h2>
@@ -125,7 +126,7 @@ function addToCart(name, price) {
     cart.push({ name, price, qty: 1 });
   }
 
-  updateCartMessage(name); // 👈 pass product name
+  updateCartMessage(); // 👈 pass product name
 }
 
 /* =========================
@@ -237,27 +238,27 @@ async function buyNow() {
    UI HELPERS
 ========================= */
 
-function updateCartMessage(lastAdded = "") {
+function updateCartMessage() {
   const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
   const totalAmount = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
 
-  // ✅ Safe update (no crash)
-  const msg = document.getElementById("cart-message");
-  if (msg) {
-    msg.innerText =
-      totalItems === 0
-        ? "🛒 Cart is empty"
-        : `🛒 ${totalItems} item(s) in cart | Added: ${lastAdded} ✅`;
+  const count = document.getElementById("cart-count");
+  const total = document.getElementById("cart-total-top");
+  const checkoutText = document.getElementById("cart-checkout");
+
+  count.innerText = totalItems;
+  total.innerText = `₹${totalAmount}`;
+
+  // show/hide based on cart
+  if (totalItems === 0) {
+    count.style.display = "none";
+    total.style.display = "none";
+    checkoutText.style.display = "none";
+  } else {
+    count.style.display = "inline";
+    total.style.display = "inline";
+    checkoutText.style.display = "inline";
   }
-
-  // ✅ Bottom bar update
-  document.getElementById("checkout-summary").innerHTML = `
-  <div style="font-size:14px;">🛒 ${totalItems} items</div>
-  <div style="font-weight:bold; font-size:16px;">₹${totalAmount}</div>
-`;
-
-  // ✅ Top icon update
-  document.getElementById("cart-count").innerText = totalItems;
 }
 
 function showSuccess(paymentId, total) {
