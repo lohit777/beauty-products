@@ -83,8 +83,8 @@
       </div>
 
       <div id="checkout-bar" class="checkout-bar">
-        <span id="checkout-summary">🛒 0 items | ₹0</span>
-        <button onclick="checkout()">Checkout 💳</button>
+        <span id="checkout-summary"></span>
+                <button onclick="checkout()">Checkout 💳</button>
       </div>
   </main>
   <div id="cart-page" class="cart-page" style="display:none;">
@@ -251,8 +251,10 @@ function updateCartMessage(lastAdded = "") {
   }
 
   // ✅ Bottom bar update
-  document.getElementById("checkout-summary").innerText =
-  `🛒 ${totalItems} items\n₹${totalAmount}`;
+  document.getElementById("checkout-summary").innerHTML = `
+  <div style="font-size:14px;">🛒 ${totalItems} items</div>
+  <div style="font-weight:bold; font-size:16px;">₹${totalAmount}</div>
+`;
 
   // ✅ Top icon update
   document.getElementById("cart-count").innerText = totalItems;

@@ -261,24 +261,28 @@ body {
 
   .checkout-bar {
     position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
     background: white;
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    padding: 12px 15px;
+  
     display: flex;
     justify-content: space-between;
-    padding: 15px 20px;
     align-items: center;
   }
   
   .checkout-bar button {
-    background: #ff4d94;
+    background: linear-gradient(135deg, #ff4d94, #ff85b3);
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 10px 16px;
     border-radius: 20px;
+    font-size: 14px;
     cursor: pointer;
+    white-space: nowrap;
   }
 
   .product-card {
@@ -299,7 +303,7 @@ body {
   }
 
   /* MOBILE VIEW */
-@media (max-width: 600px) {
+  @media (max-width: 600px) {
 
     .checkout-bar {
       flex-direction: column;
@@ -309,17 +313,16 @@ body {
     }
   
     #checkout-summary {
-      font-size: 16px;
-      text-align: center;
+      display: flex;
+      justify-content: space-between;
+      font-size: 15px;
     }
   
     .checkout-bar button {
       width: 100%;
       font-size: 16px;
       padding: 12px;
-      border-radius: 10px;
     }
-  
   }
 
   #checkout-summary {
