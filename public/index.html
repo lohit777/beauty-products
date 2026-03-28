@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Beauty Store</title>
   <link rel="stylesheet" href="style.css">
-  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="https://www.paypal.com/sdk/js?client-id=AZPZAnlXHeCbVbgasGJDaeQN8QdKPRzmCDr5aAEzgtZwWfk281dO5Y18OOQ7qCfxVB9VlLHqD6HQHU5k&currency=GBP"></script>
 </head>
 <body>
     <header class="header">
@@ -14,7 +14,7 @@
         <div class="cart-icon" onclick="checkout()">
           🛒
           <span id="cart-count" class="cart-count">0</span>
-          <span id="cart-total-top" class="cart-total-top">₹0</span>
+          <span id="cart-total-top" class="cart-total-top">£0</span>
           <span id="cart-checkout" class="cart-checkout">Checkout →</span>
 
         </div>
@@ -25,14 +25,14 @@
     <!-- Product Cards -->
     <div class="product-card">
         <h3>Face Cream</h3>
-        <p>₹10</p>
+        <p>£10</p>
       
         <button onclick="addToCart('Face Cream', 10)">Add to Cart</button>
       </div>
    
     <div class="product-card">
         <h3>Lipstick</h3>
-        <p>₹299</p>
+        <p>£299</p>
         <button onclick="addToCart('Lipstick', 299)">Add to Cart</button>
       </div>
       <div class="product-card">
@@ -44,45 +44,45 @@
 
       <div class="product-card">
         <h3>Conditioner</h3>
-        <p>350</p>
+        <p>£350</p>
       
         <button onclick="addToCart('Conditioner', 350)">Add to Cart</button>
       </div>
       <div class="product-card">
         <h3>Foundation</h3>
-        <p>599</p>
+        <p>£599</p>
         <button onclick="addToCart('Foundation', 599)">Add to Cart</button>
       </div>
 
       <div class="product-card">
         <h3>Blush</h3>
-        <p>250</p>
+        <p>£250</p>
         <button onclick="addToCart('Blush', 250)">Add to Cart</button>
       </div>
 
       <div class="product-card">
         <h3>Body Lotion</h3>
-        <p>399</p>
+        <p>£399</p>
       
         <button onclick="addToCart('Body Lotion', 399)">Add to Cart</button>
       </div>
 
       <div class="product-card">
         <h3>Perfume</h3>
-        <p>₹799</p>
+        <p>£799</p>
       
         <button onclick="addToCart('Perfume', 799)">Add to Cart</button>
       </div>
 
       <div class="product-card">
         <h3>Hand Cream</h3>
-        <p>₹299</p>
+        <p>£299</p>
       
         <button onclick="addToCart('Hand Cream', 299)">Add to Cart</button>
       </div>
       <div class="product-card">
         <h3>Face Wash</h3>
-        <p>₹199</p>
+        <p>£199</p>
       
         <button onclick="addToCart('Face Wash', 199)">Add to Cart</button>
       </div>
@@ -96,7 +96,7 @@
     <h3 id="cart-total" class="cart-total"></h3>
   
     <div class="cart-actions">
-      <button class="buy-btn" onclick="buyNow()">Buy Now 💳</button>
+      <div id="paypal-button-container" style="margin-top:20px;"></div>
       <button class="continue-btn" onclick="goHome()">← Continue Shopping</button>
     </div>
   </div>
@@ -129,9 +129,30 @@ function addToCart(name, price) {
   updateCartMessage(); // 👈 pass product name
 }
 
-/* =========================
-   CART LOGIC
-========================= */
+function renderPayPalButton(totalAmount) {
+  document.getElementById("paypal-button-container").innerHTML = "";
+
+  paypal.Buttons({
+    createOrder: function (data, actions) {
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: totalAmount.toFixed(2) // GBP format
+          }
+        }]
+      });
+    },
+
+    onApprove: function (data, actions) {
+      return actions.order.capture().then(function (details) {
+        showSuccess(details.id, totalAmount);
+        cart = [];
+        updateCartMessage();
+      });
+    }
+
+  }).render('#paypal-button-container');
+}
 
 function checkout() {
   if (cart.length === 0) {
@@ -143,7 +164,17 @@ function checkout() {
   document.getElementById("cart-page").style.display = "block";
 
   renderCart();
+
+  const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+
+  renderPayPalButton(parseFloat(total)); // 👈 ADD THIS
 }
+
+/* =========================
+   CART LOGIC
+========================= */
+
+
 
 function renderCart() {
   const container = document.getElementById("cart-items");
@@ -160,7 +191,7 @@ function renderCart() {
     div.innerHTML = `
       <div>
         <h4>${item.name}</h4>
-        <p>₹${item.price}</p>
+        <p>£${item.price}</p>
       </div>
 
       <div class="qty">
@@ -175,7 +206,7 @@ function renderCart() {
     container.appendChild(div);
   });
 
-  document.getElementById("cart-total").innerText = "Total: ₹" + total;
+  document.getElementById("cart-total").innerText = "Total: £" + total;
 }
 
 function updateCartQty(index, change) {
@@ -199,40 +230,6 @@ function removeItem(index) {
    PAYMENT
 ========================= */
 
-async function buyNow() {
-  if (cart.length === 0) {
-    alert("Cart is empty!");
-    return;
-  }
-
-  const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-
-  const res = await fetch("/create-order", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ amount: total })
-  });
-
-  const order = await res.json();
-
-  const options = {
-    key: "rzp_live_SVJmHc21qZLR1y",
-    amount: order.amount,
-    currency: "INR",
-    order_id: order.id,
-    name: "Beauty Store",
-
-    handler: function (response) {
-      showSuccess(response.razorpay_payment_id, total);
-      cart = [];
-      updateCartMessage();
-    }
-  };
-
-  new Razorpay(options).open();
-}
 
 /* =========================
    UI HELPERS
@@ -247,7 +244,7 @@ function updateCartMessage() {
   const checkoutText = document.getElementById("cart-checkout");
 
   count.innerText = totalItems;
-  total.innerText = `₹${totalAmount}`;
+  total.innerText = `£${totalAmount}`;
 
   // show/hide based on cart
   if (totalItems === 0) {
@@ -266,7 +263,7 @@ function showSuccess(paymentId, total) {
   document.getElementById("success-box").style.display = "block";
 
   document.getElementById("payment-details").innerText =
-    `Payment ID: ${paymentId}\nTotal Paid: ₹${total}`;
+  `Payment ID: ${paymentId}\nTotal Paid: £${total}`;
 }
 
 function goHome() {

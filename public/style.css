@@ -285,10 +285,10 @@ body {
   /* ACTION BUTTONS */
   .cart-actions {
     display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-  }
-  
+    flex-direction: column;
+    align-items: flex-start; /* prevents stretching */
+    gap: 10px;
+  }  
   /* BUY BUTTON */
   .buy-btn {
     background: #28a745;
@@ -302,12 +302,21 @@ body {
   
   /* CONTINUE SHOPPING */
   .continue-btn {
+    display: inline-block;   /* key fix */
+    width: auto;             /* prevent stretching */
+    padding: 8px 14px;
+    font-size: 14px;
+  
     background: #f1f1f1;
+    color: #333;
+  
     border: none;
-    padding: 12px 20px;
-    border-radius: 8px;
+    border-radius: 20px;
+  
     cursor: pointer;
-    font-size: 16px;
+    margin-top: 15px;
+  
+    align-self: flex-start;  /* align left */
   }
   
   /* HOVER EFFECTS */
