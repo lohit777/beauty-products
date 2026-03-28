@@ -37,7 +37,7 @@
       </div>
       <div class="product-card">
         <h3>Shampoo</h3>
-        <p>399</p>
+        <p>£350</p>
       
         <button onclick="addToCart('Shampoo', 399)">Add to Cart</button>
       </div>
@@ -133,25 +133,34 @@ function renderPayPalButton(totalAmount) {
   document.getElementById("paypal-button-container").innerHTML = "";
 
   paypal.Buttons({
-    createOrder: function (data, actions) {
-      return actions.order.create({
-        purchase_units: [{
-          amount: {
-            value: totalAmount.toFixed(2) // GBP format
-          }
-        }]
-      });
-    },
+  createOrder: function (data, actions) {
+    return actions.order.create({
+      intent: "CAPTURE", // 🔥 IMPORTANT
+      purchase_units: [{
+        amount: {
+          currency_code: "GBP", // 🔥 ADD THIS
+          value: totalAmount.toFixed(2)
+        }
+      }]
+    });
+  },
 
-    onApprove: function (data, actions) {
-      return actions.order.capture().then(function (details) {
-        showSuccess(details.id, totalAmount);
-        cart = [];
-        updateCartMessage();
-      });
-    }
+  onApprove: function (data, actions) {
+    return actions.order.capture().then(function (details) {
+      console.log("Payment success:", details); // debug
 
-  }).render('#paypal-button-container');
+      showSuccess(details.id, totalAmount);
+      cart = [];
+      updateCartMessage();
+    });
+  },
+
+  onError: function (err) {
+    console.error("PayPal Error:", err); // 🔥 VERY IMPORTANT
+    alert("Payment failed. Check console.");
+  }
+
+}).render('#paypal-button-container');
 }
 
 function checkout() {
