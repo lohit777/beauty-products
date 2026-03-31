@@ -8,12 +8,12 @@ app.use(cors());
 app.use(express.static("public"));
 
 // 🔐 Hardcoded PayPal credentials
-const CLIENT_ID = "AZPZAnlXHeCbVbgasGJDaeQN8QdKPRzmCDr5aAEzgtZwWfk281dO5Y18OOQ7qCfxVB9VlLHqD6HQHU5k";
-const CLIENT_SECRET = "EPH33J81nAv9kqITIOckq0FVURqwJv8oLk2cbQnwtom5IBTfK_ALiqdoF1VbHLp8h2dTyN28UEXRNQW3"; // 👈 paste your secret here
+const CLIENT_ID = "AWSQNxAnUo2b-ZwozqoAOJwPwJS0W0XXbdnZk2LWlB-olE1skrCzmxl5S-7E1AD70Kboam8NZa2B-R_s";
+const CLIENT_SECRET = "EB4JJqFaG639186WmH2qCtxQim8iKzXfa8XcC6AFuQoIkaVObLGD76Nl3iCUhP4aDL6wePCk2TIyZv-T"; // 👈 paste your secret here
 
 // 🔹 Get PayPal access token
 async function getAccessToken() {
-  const response = await fetch("https://api-m.sandbox.paypal.com/v1/oauth2/token", {
+  const response = await fetch("https://api-m.paypal.com/v1/oauth2/token", {
     method: "POST",
     headers: {
       "Authorization":
@@ -36,7 +36,7 @@ app.post("/create-paypal-order", async (req, res) => {
     const accessToken = await getAccessToken();
 
     const response = await fetch(
-      "https://api-m.sandbox.paypal.com/v2/checkout/orders",
+      "https://api-m.paypal.com/v2/checkout/orders",
       {
         method: "POST",
         headers: {
@@ -73,7 +73,7 @@ app.post("/capture-paypal-order", async (req, res) => {
     const accessToken = await getAccessToken();
 
     const response = await fetch(
-      `https://api-m.sandbox.paypal.com/v2/checkout/orders/${orderID}/capture`,
+      `https://api-m.paypal.com/v2/checkout/orders/${orderID}/capture`,
       {
         method: "POST",
         headers: {
